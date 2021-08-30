@@ -1,0 +1,15 @@
+import json
+from web3 import Web3
+import pymongo
+
+chain_url = "HTTP://127.0.0.1:8545"
+web3 = Web3(Web3.HTTPProvider(chain_url))
+
+abi = json.loads('[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"string","name":"_addr","type":"string"}],"name":"userVerify","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"_candidateId","type":"uint256"}],"name":"voted","type":"event"},{"inputs":[{"internalType":"string","name":"_name","type":"string"}],"name":"addCandidate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_govID","type":"string"},{"internalType":"string","name":"_addr","type":"string"}],"name":"addUser","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"candidates","outputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"voteCount","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"candidatesCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_candidateId","type":"uint256"}],"name":"doVote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"getCandidates","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_switch","type":"uint256"}],"name":"getInfo","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"verified","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"voter","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"wallet","outputs":[{"internalType":"string","name":"govID","type":"string"},{"internalType":"string","name":"addr","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"walletsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]')
+
+address = web3.toChecksumAddress("0x396ddf784936d76b1c81e495da194742458651c6")
+contract = web3.eth.contract(address=address, abi=abi)
+
+client = pymongo.MongoClient("mongodb+srv://ayushChutiya:chutiya123@cluster0.kacjq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client["myFirstDatabase"]
+collection = db["users"]

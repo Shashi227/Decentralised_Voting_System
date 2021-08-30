@@ -1,0 +1,15 @@
+.fbg{
+    background-image: url('../Image/vote.jpg') ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    
+    
+
+}
+.form-container
+{
+    border:0px solid #fff; padding:50px 60px; margin-top:20vh;
+}
